@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - export FLUTTER_VERSION=3.24.0
+        - if command -v yum >/dev/null 2>&1; then yum install -y xz; elif command -v apt-get >/dev/null 2>&1; then apt-get update && apt-get install -y xz-utils; else echo "No supported package manager found to install xz" && exit 1; fi
         - curl -L "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz" -o flutter.tar.xz
         - tar xf flutter.tar.xz
         - export PATH="$PATH:$PWD/flutter/bin"
